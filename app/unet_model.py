@@ -1,5 +1,6 @@
 from keras import layers, Model
 
+# Fungsi untuk membangun arsitektur U-Net
 def build_unet(input_size=(256, 256, 3)):
     inputs = layers.Input(input_size)
 
@@ -45,7 +46,9 @@ def build_unet(input_size=(256, 256, 3)):
     c9 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(u9)
     c9 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(c9)
 
+    # Output layer dengan aktivasi sigmoid
     outputs = layers.Conv2D(1, (1, 1), activation='sigmoid')(c9)
 
+    # Model U-Net
     model = Model(inputs, outputs)
     return model
